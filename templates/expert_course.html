@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Videos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('/static/login.jpg');
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .video-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .video {
+      width: 250px;
+      margin-bottom: 30px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .video img {
+      width: 100%;
+      height: auto;
+    }
+    .video h2 {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #FFFFFF;
+    }
+    .video p {
+      margin: 0;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+
+    .video a {
+      text-decoration: none; /* Remove underline from links */
+      color: inherit; /* Inherit text color from parent (.video) */
+      transition: color 0.3s ease;
+    }
+
+    .video p:hover {
+      color: #4058e3; /* Change color on hover */
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Workout Videos</h1>
+    <div class="video-container">
+      <div class="video">
+        <a href="https://youtu.be/15ZpH9CMsg8?feature=shared">
+        <img src="/static/lowerbody.jpg" alt="Leg Workout">
+        <h2>LowerBody Workout</h2>
+        <p>Get those legs burning with these exercises.</p>
+      </div>
+      <div class="video">
+         <a href="https://youtu.be/F9RSR8eIE-Y?feature=shared">
+        <img src="/static/arm.jpg" alt="Arm Workout">
+        <h2>Arm Workout</h2>
+        <p>Tone your arms and build strength.</p>
+      </div>
+      <div class="video">
+         <a href="https://youtu.be/F1JOpKq7pqY?feature=shared">
+        <img src="/static/fullbody.jpg" alt="Full Body Workout">
+        <h2>Upper Body Workout</h2>
+        <p>Engage multiple muscle groups for an effective workout.</p>
+      </div>
+      <div class="video">
+         <a href="https://youtu.be/T6KK_p1lMwo?feature=shared">
+        <img src="/static/chest.jpg" alt="Chest Workout">
+        <h2>Chest Workout</h2>
+        <p>Develop a strong and defined chest.</p>
+      </div>
+      <div class="video">
+         <a href="https://youtu.be/VggS91t20_U?feature=shared">
+        <img src="/static/calves.jpg" alt="Calves Workout">
+        <h2>Calves Workout</h2>
+        <p>Strengthen and define your calf muscles.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

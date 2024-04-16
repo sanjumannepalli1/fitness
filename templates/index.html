@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness App</title>
+  <!-- Add jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('/static/home.jpg'); /* Adjust the path accordingly */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100vh;
+    }
+    .level-block {
+      width: 30%;
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .level-block:hover {
+      background-color: #e0e0e0;
+
+    }
+
+    #welcome-message {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 35px;
+    }
+
+    #feedback-form {
+      display: none;
+      position: fixed;
+      bottom: 70px; /* Adjusted position to accommodate  button */
+      right: 20px; /* Adjusted position to accommodate  button */
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #contact-us-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    #logout-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+    }
+
+
+
+
+     #diet-plans-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 100%; /* Adjusted position to display below the "Diet Plans" heading */
+  left: 0; /* Adjusted position */
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+  </style>
+</head>
+<body>
+<div id="welcome-message">Welcome {{ user.user_name }}</div>
+<a id="logout-button" onclick="logout()">Logout</a>
+<!--<div id="username">Welcome {{ user.user_name }}</div>-->
+
+
+<div id="diet-plans-dropdown" class="dropdown">
+  <h1>Diet Plans</h1>
+  <div class="dropdown-content">
+    <a href="/begginer">Begginer</a>
+    <a href="/expert">Expert</a>
+  </div>
+</div>
+
+<div class="container">
+
+
+
+  <div class="level-block" onclick="openPage('beginner')">
+    <a href="/beginner_course">Begginers</a>
+    <p>Click here for Beginner level workouts</p>
+  </div>
+  <div class="level-block" onclick="openPage('intermediate')">
+    <a href="/intermediate_course" >Intermediate</a>
+
+    <p>Click here for Intermediate level workouts</p>
+  </div>
+  <div class="level-block" onclick="openPage('expert')">
+    <a href="/expert_course">Expert</a>
+
+    <p>Click here for Expert level workouts</p>
+  </div>
+</div>
+
+<div id="feedback-form">
+
+  <form >
+<!--    <label for="feedback-text">Message:</label>-->
+    <textarea id="feedback-text" placeholder="Enter your message here..." rows="4" cols="30"></textarea>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<button id="contact-us-button" onclick="toggleFeedbackForm()">Contact Us</button>
+
+<script>
+  function toggleFeedbackForm() {
+    var feedbackForm = document.getElementById('feedback-form');
+    if (feedbackForm.style.display === 'block') {
+      feedbackForm.style.display = 'none';
+    } else {
+      feedbackForm.style.display = 'block';
+    }
+
+
+  }
+
+<!--  function openPage(level) {-->
+<!--    let pageUrl;-->
+<!--    switch (level) {-->
+<!--      case 'beginner':-->
+<!--        pageUrl = '/beginner_course.html';-->
+<!--        break;-->
+<!--      case 'intermediate':-->
+<!--        pageUrl = '/intermediate_course.html';-->
+<!--        break;-->
+<!--      case 'expert':-->
+<!--        pageUrl = '/expert_course.html';-->
+<!--        break;-->
+<!--      default:-->
+<!--        pageUrl = '';-->
+<!--    }-->
+<!--    if (pageUrl) {-->
+<!--      window.open(pageUrl, '_blank');-->
+<!--    } else {-->
+<!--      alert('Page not available');-->
+<!--    }-->
+<!--  }-->
+
+   function logout() {
+    // Perform logout actions here (if any)
+    window.location.href = '/'; // Redirect to the logout URL
+  }
+
+  $(document).ready(function() {
+    $('#feedback-form').submit(function(event) {
+      event.preventDefault();
+
+      var feedbackMessage = $('#feedback-text').val();
+
+      $.ajax({
+        type: 'POST',
+        url: '/submit_feedback',
+        contentType: 'application/json;charset=UTF-8',
+        data: JSON.stringify({ feedback_message: feedbackMessage }),
+        success: function(response) {
+          alert('Feedback submitted successfully');
+          window.location.reload()
+        },
+        error: function(error) {
+          console.error('Failed to submit feedback', error);
+        }
+      });
+    });
+  });
+</script>
+
+
+</body>
+</html>

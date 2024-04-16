@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register - FITNESS</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    .login-register {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      width: 300px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: calc(100% - 20px);
+      padding: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+
+
+
+  </style>
+  <script>
+    $(document).ready(function() {
+      $('form').submit(function(event) {
+        event.preventDefault();
+
+        // Collect form data
+        var formData = {
+          username: $('#register-username').val(),
+          useremail: $('#register-useremail').val(),
+          password: $('#register-password').val()
+        };
+
+        // Send AJAX request to app.py
+        $.ajax({
+          type: 'POST',
+          url: '/register',
+          data: formData,
+          success: function(response) {
+          debugger
+            if (response.exists) {
+              alert('Username already exists. Please choose another.');
+            } else {
+                debugger
+                alert('Registration successfudddl!')
+                window.location.href = '/';
+            }
+          },
+          error: function(error) {
+            console.error('Failed to register', error);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="header">
+    <h1>FITNess</h1>
+  </div>
+
+  <div class="content">
+    <div class="login-register">
+      <div class="form-container">
+        <h2>Register</h2>
+        <form method="POST" action="/register">
+          <label for="register-username">Username:</label>
+          <input type="text" id="register-username" name="username" required>
+          <label for="register-useremail">User Email:</label>
+          <input type="text" id="register-useremail" name="useremail" required>
+          <label for="register-password">Password:</label>
+          <input type="password" id="register-password" name="password" required>
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

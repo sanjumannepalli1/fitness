@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">-->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      background-image: url('/static/login.jpg'); /* Adjust the path accordingly */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .login-register {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url("{{ url_for('static', filename='20brandeddesktopbackground.jpg') }}") center/cover no-repeat;
+    }
+
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      width: 300px; /* Adjust as needed */
+    }
+
+    .form-container h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    input {
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #333;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      margin-top: 15px;
+    }
+  </style>
+  <title>Log In - Fitness</title>
+</head>
+<body>
+
+
+  <div class="content login-register" role="img" aria-label="Background Image">
+    <div class="form-container" role="form">
+      <h2>Log In</h2>
+
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <form method="POST" action="/login">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Log In</button>
+      </form>
+      <p>Don't have an account? <a href="/register">Create an account</a></p>
+    </div>
+  </div>
+</body>
+</html>
