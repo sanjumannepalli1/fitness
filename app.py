@@ -106,7 +106,8 @@ def login():
             session['username'] = username
             flash('Login successful', 'success')
 
-            return render_template('index.html', user = current_user)
+            #return render_template('index.html', user = current_user)
+            return redirect(url_for('dashboard', username=current_user))
         else:
             print("please check the creds")
             error = 'Invalid credentials. Please try again.'
@@ -114,6 +115,12 @@ def login():
     else:
 
         return render_template('login.html')
+    
+@app.route('/dashboard/<username>')
+def dashboard(username):
+    # pdb.set_trace()
+    # This route could render a dashboard page with personalized content based on the username
+    return render_template('index.html', user=username)
 
 
 
